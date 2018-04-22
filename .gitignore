@@ -1,0 +1,10 @@
+bin
+conf
+data
+database-scripts
+logs
+luceneindexes
+plugins
+tmp
+tomcat-home
+bundles
