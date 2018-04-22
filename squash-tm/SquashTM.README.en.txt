@@ -1,0 +1,90 @@
+Squash TM readme.txt
+====================
+
+Squash TM reference documentation is available at https://sites.google.com/a/henix.fr/wiki-squash-tm/
+
+I Prerequisite
+==============
+
+- java : 1.8 and up
+- Browser : Internet Explorer 9+, Mozilla [Firefox ESR] 38+ or Chrome 47+
+
+[Firefox ESR]: https://www.mozilla.org/en-US/firefox/organizations/
+
+
+II Kickstart
+============
+
+II.A Windows installer
+----------------------
+
+- double-click on the installer and follow the instructions.
+- double click on the desktop shortcut to start Squash TM.
+- wait for the application to bootstrap.
+- open a browser and type the Squash TM url : `http://localhost:8080/squash/`
+- administrator account : admin/admin.
+
+II.B zip/tgz archive
+--------------------
+
+- uncompress the archive and move its content to the location of your choice.
+- go to the `bin/` folder and  run `startup.bat` (Windows) or `startup.sh` (Linux/Mac).
+- wait for the application to bootstrap.
+- open a browser and type the Squash TM url : `http://localhost:8080/squash/`
+- administrator account : admin/admin.
+
+
+III Using a MySQL database
+==========================
+
+Squash Test Manager uses by default an H2 embedded database.
+This database is intended to quickly start and try out Squash TM.
+**It is not suitable for production use**, production grade deployment should rely on a MySQL database.
+
+How to use a MySQL database
+---------------------------
+
+- create a database
+- create a database user with insert/update/delete grants on this database.
+- change MySQL configuration (`my.cnf`) : either add or change `default-storage-engine = InnoDB`
+- create the database structure by running the `database-scripts/mysql-full-install.sql` script.
+
+- Modify the `startup.bat` (win32) or `startup.sh` (unix) files :
+
+    * `bin/startup.bat` :
+
+        set DB_TYPE=mysql
+        set DB_URL=jdbc:mysql://<host>[:<port>]/<db_name>
+        set DB_USERNAME=<created_database_user>
+        set DB_PASSWORD=<created_database_password>
+
+    * `bin/startup.sh` :
+
+        DB_TYPE=mysql
+        DB_URL=jdbc:mysql://<host>[:<port>]/<db name>
+        DB_USERNAME=<created_database_user>
+        DB_PASSWORD=<created_database_password>
+
+How to use a PostgreSQL database (Squash TM 1.11.0+)
+----------------------------------------------------
+
+- create a database
+- create a database user with insert/update/delete grants on this database.
+- create the database structure by running the `database-scripts/postgresql-full-install.sql` script.
+
+- Modify the `startup.bat` (win32) or `startup.sh` (unix) files :
+
+    * `bin/startup.bat` :
+
+        set DB_TYPE=postgresql
+        set DB_URL=jdbc:postgresql://<host>[:<port>]/<db_name>
+        set DB_USERNAME=<created_database_user>
+        set DB_PASSWORD=<created_database_password>
+
+
+    * `bin/startup.sh` :
+
+        DB_TYPE=postgresql
+        DB_URL=jdbc:postgresql://<host>[:<port>]/<db name>
+        DB_USERNAME=<created_database_user>
+        DB_PASSWORD=<created_database_password>

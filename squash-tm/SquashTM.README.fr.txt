@@ -1,0 +1,91 @@
+Squash TM readme.txt
+====================
+
+Une documentation exhaustive est disponible à l'URL https://sites.google.com/a/henix.fr/wiki-squash-tm/
+
+I Pré requis
+============
+
+- java : version 8 ou supérieure
+- Navigateur internet : Internet Explorer 9+, Mozilla [Firefox ESR] 38+ ou Chrome 47+
+
+[Firefox ESR]: https://www.mozilla.org/en-US/firefox/organizations/
+
+
+II Démarrage rapide
+===================
+
+II.A Exécutable Windows
+-----------------------
+
+- double cliquer sur l'installeur et suivez les instructions pour installer Squash TM.
+- cliquer sur l'icône raccourci pour lancer Squash.
+- patienter le temps que  l'application initialise.
+- ouvrir un navigateur et accédez à Squash TM via l'URL : `http://localhost:8080/squash/`
+- compte administrateur : admin/admin.
+
+II.B Archive zip/tgz
+--------------------
+
+- décompresser l'archive et  déplacer le contenu  à l'emplacement souhaité.
+- aller dans bin/ et exécuter `startup.bat` (Windows) ou `startup.sh` (Linux/Mac).
+- patienter le temps que l'application initialise.
+- ouvrir un navigateur et accédez  à Squash via l'URL : `http://localhost:8080/squash/`.
+- compte administrateur : admin/admin.
+
+
+III Utilisation d'une base MySQL
+================================
+
+Squash Test Manager est livré par défaut avec une base de données H2 embarquée.
+Cette base a vocation à permettre de démarrer et d'évaluer rapidement Squash TM.
+**Mais elle ne constitue en aucun cas  un système fiable de production**.
+Pour cet usage, il est nécessaire de s'appuyer sur une base MySQL.
+
+Pour utiliser une base MySQL externe
+------------------------------------
+
+- créer une base de données pour l'application et un utilisateur applicatif ayant les droits insert/update/delete sur cette base.
+- modifier la configuration de MySQL (`my.cnf`) : ajoutez ou modifier `default-storage-engine = InnoDB`
+- créer la structure avec le script `database-scripts/mysql-full-install.sql`.
+
+- Modifier les fichiers de démarrage `startup.bat` (win32) ou `startup.sh` (unix) :
+
+    * `bin/startup.bat` :
+
+        set DB_TYPE=mysql
+        set DB_URL=jdbc:mysql://<host>[:<port>]/<db_name>
+        set DB_USERNAME=<login_user_applicatif>
+        set DB_PASSWORD=<password_user_applicatif>
+
+
+    * `bin/startup.sh` :
+
+        DB_TYPE=mysql
+        DB_URL=jdbc:mysql://<host>[:<port>]/<db name>
+        DB_USERNAME=<login_user_applicatif>
+        DB_PASSWORD=<password_user_applicatif>
+
+Pour utiliser une base PostgreSQL externe (SquashTM 1.11.0+)
+------------------------------------------------------------
+
+- créer une base de données pour l'application
+- créer un utilisateur applicatif ayant les droits insert/update/delete sur cette base.
+- créer la structure avec le script `database-scripts/postgresql-full-install.sql`.
+
+- Modifier les fichiers de démarrage `startup.bat` (win32) ou `startup.sh` (unix) :
+
+    * `bin/startup.bat` :
+
+        set DB_TYPE=postgresql
+        set DB_URL=jdbc:postgresql://<host>[:<port>]/<db_name>
+        set DB_USERNAME=<login_user_applicatif>
+        set DB_PASSWORD=<password_user_applicatif>
+
+
+    * `bin/startup.sh` :
+
+        DB_TYPE=postgresql
+        DB_URL=jdbc:postgresql://<host>[:<port>]/<db name>
+        DB_USERNAME=<login_user_applicatif>
+        DB_PASSWORD=<password_user_applicatif>
